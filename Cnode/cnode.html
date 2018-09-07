@@ -8,6 +8,7 @@
     <script src="components/lzl_2/lzl_2.js"></script>
     <script src="jquery-1.8.3.min.js"></script>
     <script src="components/lzl_3/lzl_3.js"></script>
+    <script src="components/lzl_0/lzl_0.js"></script>
 
 
 </head>
@@ -135,30 +136,17 @@
     }
 </style>
 <body>
-<div class="h-b">
-    <div class="h-b-di">
-        <img class="h-b-img" src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="">
-        <input class="h-b-di-in" type="text">
-    </div>
-    <div class="h-b-div">
-        <div>首页</div>
-        <div>新手入门</div>
-        <div>API</div>
-        <div>关于</div>
-        <div>注册</div>
-        <div>登录</div>
-    </div>
-</div>
 
-<div id="app">
 
+<div id="lzlapp">
+    <herda></herda>
     <lzl class="z-w" v-bind:is="isComponent" v-bind:count="count"></lzl>
     <zu class="zuz"></zu>
     <ping class="pin" v-bind:count="count"></ping>
 </div>
 <script>
    let vm = new Vue({
-       el:'#app',
+       el:'#lzlapp',
        data:{
                 count:{},
                 isComponent:'lzl'
