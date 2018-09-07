@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="components/lzl_1/lzl_1.js"></script>
+    <script src="components/lzl_2/lzl_2.js"></script>
+    <script src="jquery-1.8.3.min.js"></script>
+    <script src="components/lzl_3/lzl_3.js"></script>
+
+
+</head>
+<style>
+    html{
+        min-width: 1200px;
+    }
+    body{
+        background-color: gainsboro;
+        min-width: 1200px;
+    }
+    .h-b{
+        background-color: rgba(76, 76, 76, 0.97);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 0 15px;
+    }
+    .h-b-img{
+        width: 120px;
+        height: 60px;
+        vertical-align: top;
+        padding-left: 30px;
+
+    }
+    .h-b-di-in{
+        margin-top: 25px;
+        margin-left: 30px;
+        width: 300px;
+        border-radius: 10px;
+    }
+    .h-b-di{
+        display: inline-block;
+    }
+    .h-b-div{
+        display: inline-block;
+        float: right;
+        margin-top: 25px;
+        margin-right: 30px;
+    }
+    .h-b-div>div{
+        display: inline-block;
+        margin-right: 40px;
+    }
+    .z-w{
+        background-color: white;
+        width: 60%;
+        margin-left:5%;
+        margin-top: 7%;
+        display: inline-block;
+        padding: 15px;
+    }
+    .zuz{
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 5.6%;
+        margin-left:2%;
+    }
+    .zu_di>div{
+        background-color: white;
+        vertical-align: top;
+        width: 100%;
+        margin-bottom: 7%;
+        margin-left:2%;
+    }
+    .zu-h{
+        background-color: #f5f5f5;
+        padding: 15px;
+    }
+    .zu-img{
+        width: 80px;
+        height: 80px;
+    }
+    .zu-di{
+        padding: 20px;
+    }
+    .zu-di-name{
+        display: inline-block;
+        font-size: 20px;
+        vertical-align: top;
+        margin-top: 30px;
+        color: #c2c2c2;
+        margin-left: 20px;
+    }
+    .zu-di-ji{
+        margin: 10px 0;
+    }
+    .zu-di-wei{
+        margin: 10px 0;
+    }
+    .pin{
+        background-color: white;
+        width: 60%;
+        margin-left:5%;
+        margin-top: 7%;
+        display: inline-block;
+        padding: 25px;
+    }
+    .pin>div{
+        border-bottom: 1px solid #c9c9c9;
+        margin: 15px 0;
+    }
+    .p-img{
+        width: 40px;
+        height: 40px;
+    }
+    .p-sp{
+        vertical-align: top;
+        line-height: 40px;
+        font-weight: 800;
+        color: #aeaeae;
+        margin-left: 25px;
+    }
+    .p_div>div>p>img{
+        width: 80%;
+    }
+    .p_div>div>pre{
+        width:100%;
+        overflow: hidden;
+    }
+    .zu_di>div{
+        margin-top: 20px;
+    }
+</style>
+<body>
+<div class="h-b">
+    <div class="h-b-di">
+        <img class="h-b-img" src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="">
+        <input class="h-b-di-in" type="text">
+    </div>
+    <div class="h-b-div">
+        <div>首页</div>
+        <div>新手入门</div>
+        <div>API</div>
+        <div>关于</div>
+        <div>注册</div>
+        <div>登录</div>
+    </div>
+</div>
+
+<div id="app">
+
+    <lzl class="z-w" v-bind:is="isComponent" v-bind:count="count"></lzl>
+    <zu class="zuz"></zu>
+    <ping class="pin" v-bind:count="count"></ping>
+</div>
+<script>
+   let vm = new Vue({
+       el:'#app',
+       data:{
+                count:{},
+                isComponent:'lzl'
+           },
+           created(){
+           $.ajax({
+               type:'get',
+               url:'https://cnodejs.org/api/v1/topic/5b223c1d5cd02be640901490?mdrender=true\n',
+               success: (data)=> {
+                   this.count = data;
+               }
+           })
+       },
+   })
+</script>
+</body>
+</html>
