@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cnode</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="jquery-1.8.3.min.js"></script>
+    <script src="components/sdn_content/sdn_content.js"></script>
+    <script src="components/sdn_tip/sdn_tip.js"></script>
+    <script src="components/sdn_cream/sdn_cream.js"></script>
+    <script src="components/sdn_share/sdn_share.js"></script>
+    <script src="components/sdn_ask/sdn_ask.js"></script>
+    <script src="components/sdn_leftAsk/sdn_leftAsk.js"></script>
+    <style>
+        body,html{
+            background-color: #e3e3e3;
+        }
+        .two{
+            display: inline-block;
+        }
+        .s_wrap{
+            width: 900px;
+            display: inline-block;
+            padding: 10px;
+            border-bottom: 1px solid gainsboro;
+            position: relative;
+            margin-left: 50px;
+            background-color: white;
+        }
+        .s_wrap:hover{
+            background-color: #f6f6f6;
+        }
+        .left_img{
+            width: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .re_wrap{
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 5px;
+            width: 70px;
+            text-align: center;
+        }
+        .reply{
+            font-size: 14px;
+            color: #b47db4;
+        }
+        .visit{
+            font-size: 14px;
+            color: gray;
+        }
+        .top_{
+            display: inline-block;
+            vertical-align: top;
+            background-color: #79c32c;
+            color: white;
+            font-size: 13px;
+            padding: 3px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .top_2{
+            display: inline-block;
+            vertical-align: top;
+            background-color: gainsboro;
+            color: gray;
+            font-size: 13px;
+            padding: 3px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .s_title{
+            width: 500px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            -webkit-line-clamp:1;
+            position: absolute;
+            left: 170px;
+            top: 15px;
+            cursor: pointer;
+        }
+        .s_title:hover{
+             text-decoration:underline;
+         }
+        .right_img{
+            width: 20px;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            cursor: pointer;
+        }
+        .tip_wrap{
+            width: 900px;
+            margin-left: 50px;
+            display: inline-block;
+            background-color: #f6f6f6;
+            color: #79c32c;
+            font-size: 14px;
+            padding: 10px 0 10px 20px;
+        }
+        .tip_{
+            margin-right: 20px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .tip_:hover{
+            color: #0000ad;
+        }
+        .tip_2{
+            margin-right: 20px;
+            display: inline-block;
+            cursor: pointer;
+            background-color: #79c32c;
+            color: white;
+            padding: 3px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <sdn-tip :tip="tip" :tip_index="tip_index" :tip_2="tip_2" :tip_="tip_" @tip-index-bgc="tip_click" :tip_click="tip_click" :tip_wrap="tip_wrap"></sdn-tip>
+    <component v-bind:is="isComponent" :content="content" :top_2="top_2" :title_index="title_index" @title-index-bgc="s_title_c" :s_title_c="s_title_c" :re_wrap="re_wrap" :s_wrap="s_wrap" :reply="reply" :left_img="left_img" :visit="visit" :top_="top_" :s_title="s_title" :right_img="right_img"></component>
+</div>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            content:{},
+            reply:true,
+            visit:true,
+            left_img:true,
+            top_:true,
+            top_2:true,
+            s_title:true,
+            right_img:true,
+            s_wrap:true,
+            re_wrap:true,
+            tip_wrap:true,
+            tip_:true,
+            tip_2:true,
+            tip_index:0,
+            title_index:0,
+            tip:['全部','精华','分享','问答','招聘','客户端测试'],
+            isComponent:'a-list'
+        },
+        created(){
+            $.ajax({
+                type:'get',
+                url:'https://cnodejs.org/api/v1/topics?page=1&limit=20',
+                success:(data)=>{
+                    this.content = data;
+                    console.log(data);
+                }
+            })
+        },
+        methods:{
+            tip_click(data){
+                this.tip_index = data;
+                if(this.tip_index == 0){
+                    this.isComponent = 'a-list';
+                }else if(this.tip_index == 1){
+                    this.isComponent = 'sdn-cream';
+                }else if(this.tip_index == 2){
+                    this.isComponent = 'sdn-share';
+                }else if(this.tip_index == 3){
+                    this.isComponent = 'sdn-ask';
+                }
+            },
+            s_title_c(data){
+                this.title_index = data;
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
